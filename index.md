@@ -45,8 +45,4 @@ output "selected_fruit" {
 
 | Name          | Description |
 |:---	        |:---	      |
-| expression  	| The string that you want to compare with your different cases of strings 	      |
-
-| Name          | Description |
-|:---	        |:---	      |
 | result  	    | Return the object matching your expression |

@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+## Usage
+```
+# Expression to compare
+variable "fruit" {
+    default = "apple"
+}
 
-You can use the [editor on GitHub](https://github.com/lonnyantunes/terraform-provider-switch-case/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Cases to compare with expression
+variable "fruits" {
+    default = {
+        "apple" = {
+            message = "Apple is selected"
+        },
+        "orange" = {
+            message = "Orange is selected"
+        },
+        "strawberry" = {
+            message = "Strawberry is selected"
+        }
+    }
+}
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Module do switch-case for you
+module "my-switch-case" {
+    source = "github.com/lonnyantunes/terraform-provider-switch-case"
+    expression = var.fruit
+    cases = var.fruits
+}
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# It returns a result
+output "selected_fruit" {
+    value = module.my-switch-case.result.message
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Inputs
 
-### Jekyll Themes
+| Name          | Description |  Type 	                             |  Default 	| Required  |
+|:---	        |:---	      |:---	                                 |:---	        |:---	    |
+| expression  	| The string that you want to compare with your different cases of strings 	      |  `string`  	                         | ""             | Yes       |
+| cases  	    | The strings you want to compare with the provided expression	      | `map(object({ message = string }))`  	                         | <pre>{ <br>  "" = {<br>         error = "You have to write and set your custom cases." <br>  } <br>}</pre>            | Yes       |
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lonnyantunes/terraform-provider-switch-case/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Outputs
+| Name          | Description |
+|:---	        |:---	      |
+| result  	    | Return the object matching your expression      |

@@ -42,6 +42,7 @@ output "selected_fruit" {
 
 
 ## Outputs
+
 | Name          | Description |
 |:---	        |:---	      |
-| result  	    | Return the object matching your expression      |
+| result  	    | Return the object matching your expression |
